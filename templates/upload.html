@@ -1,0 +1,58 @@
+{% extends 'base.html' %} {% block title %}Upload Marks{% endblock %} 
+{% block content %}
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="input-group">
+    <input type="file" class="form-control" id="file" name="file" onchange="validate(event)" required />
+
+    <select class="form-select" id="phase_choice" name="phase_choice">
+      <option selected>Choose Phase Number</option>
+      <option value="phase1">Phase 1</option>
+      <option value="phase2">Phase 2</option>
+      <option value="phase3">Phase 3</option>
+      <option value="phase4">Phase 4</option>
+      <option value="phase5">Phase 5</option>
+    </select>
+
+    <input
+      class="btn btn-primary"
+      type="submit"
+      id="upload_btn"
+      value="Upload"
+    />
+  </div>
+</form>
+<p id="message"></p>
+
+<script>
+  function validate(event) {
+    if (
+      !event ||
+      !event.target ||
+      !event.target.files ||
+      event.target.files.length === 0
+    ) {
+      return;
+    }
+
+    const name = event.target.files[0].name;
+    const lastDot = name.lastIndexOf('.');
+    const filename = name.substring(0, lastDot)
+    const ext = name.substring(lastDot + 1);
+    const p = document.getElementById("message")
+    const submit = document.getElementById('upload_btn')
+
+    if (ext === "csv" || ext === "xlsx" || ext === "xls") {
+      submit.disabled = false;
+      p.className = ""
+      p.innerText = " "
+    } else {
+      submit.disabled = true;
+      p.className = "text-danger"
+      p.innerText = "Invalid file chosen. Please choose a file with .xlsx/.csv/.xls extension."
+    }
+  }
+</script>
+
+{% endblock %}

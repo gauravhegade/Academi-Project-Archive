@@ -1,0 +1,34 @@
+{% extends 'base.html' %} {% block title %}View Marks{% endblock %} 
+{% block content %}
+  <form method="get" action="{% url 'search' %}">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        name="usn"
+        placeholder="Enter USN"
+        aria-label="USN"
+        aria-describedby="search-button"
+        value="{{ request.GET.usn }}"
+      />
+      <button class="btn btn-primary" type="submit" id="search-button">
+        Search
+      </button>
+    </div>
+  </form>
+
+  {% if results %}
+  <div class="mt-4">
+    <h3>Search Results:</h3>
+    <ul class="list-group">
+      {% for record in results %}
+      <li class="list-group-item">
+        {{ record.name }} - {{ record.usn }} - {{ record.marks }}
+      </li>
+      {% empty %}
+      <li class="list-group-item">No records found.</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+{% endblock %}

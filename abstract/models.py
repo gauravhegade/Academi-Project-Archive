@@ -1,35 +1,81 @@
 from django.db import models
-from django.contrib.auth.models import User
 
-
-class Mentor(models.Model):
-    mid = models.PositiveIntegerField(primary_key=True)
-    mentor = models.ForeignKey(User, on_delete=models.CASCADE)
-    def __str__(self):
-        return f"{self.mentor.username}"
-
-
-class Project(models.Model):
-    project_id = models.PositiveIntegerField(primary_key=True)
-    project_title = models.CharField(max_length=200)
-
-    def __str__(self):
-        return f"{self.project_id} - {self.project_title}"
-
-
-class Group(models.Model):
-    group_id = models.IntegerField(primary_key=True)
-    project_id = models.ForeignKey(Project, on_delete=models.SET_NULL, null=True)
-    mid = models.ForeignKey(Mentor, on_delete=models.SET_NULL, null=True)
+class Phase1(models.Model):
+    usn = models.CharField(max_length=20)
+    name = models.CharField(max_length=255)
+    criteria_a = models.DecimalField(max_digits=5, decimal_places=2)
+    criteria_b = models.DecimalField(max_digits=5, decimal_places=2)
+    criteria_c = models.DecimalField(max_digits=5, decimal_places=2)
+    criteria_d = models.DecimalField(max_digits=5, decimal_places=2)
+    criteria_e = models.DecimalField(max_digits=5, decimal_places=2)
+    criteria_f = models.DecimalField(max_digits=5, decimal_places=2)
+    score = models.DecimalField(max_digits=5, decimal_places=2)
+    year = models.IntegerField()
 
     def __str__(self):
-        return f"{self.group_id}"
-
-
-class Student(models.Model):
-    student = models.ForeignKey(User, on_delete=models.CASCADE)
-    usn = models.CharField(max_length=10, primary_key=True)
-    group_id = models.ForeignKey(Group, on_delete=models.SET_NULL, null=True)
+        return f'{self.name} - {self.usn}'
+    
+class Phase2(models.Model):
+    usn = models.CharField(max_length=20)
+    name = models.CharField(max_length=255)
+    criteria_a = models.DecimalField(max_digits=5, decimal_places=2)
+    criteria_b = models.DecimalField(max_digits=5, decimal_places=2)
+    criteria_c = models.DecimalField(max_digits=5, decimal_places=2)
+    criteria_d = models.DecimalField(max_digits=5, decimal_places=2)
+    criteria_e = models.DecimalField(max_digits=5, decimal_places=2)
+    score = models.DecimalField(max_digits=5, decimal_places=2)
+    year = models.IntegerField()
 
     def __str__(self):
-        return f"{self.student.username} - USN:{self.usn}"
+        return f'{self.name} - {self.usn}'
+    
+class Phase3(models.Model):
+    usn = models.CharField(max_length=20)
+    name = models.CharField(max_length=255)
+    criteria_a = models.DecimalField(max_digits=5, decimal_places=2)
+    criteria_b = models.DecimalField(max_digits=5, decimal_places=2)
+    criteria_c = models.DecimalField(max_digits=5, decimal_places=2)
+    criteria_d = models.DecimalField(max_digits=5, decimal_places=2)
+    criteria_e = models.DecimalField(max_digits=5, decimal_places=2)
+    score = models.DecimalField(max_digits=5, decimal_places=2)
+    year = models.IntegerField()
+
+    def __str__(self):
+        return f'{self.name} - {self.usn}'
+    
+class Phase4(models.Model):
+    usn = models.CharField(max_length=20)
+    name = models.CharField(max_length=255)
+    criteria_a = models.DecimalField(max_digits=5, decimal_places=2)
+    criteria_b = models.DecimalField(max_digits=5, decimal_places=2)
+    criteria_c = models.DecimalField(max_digits=5, decimal_places=2)
+    criteria_d = models.DecimalField(max_digits=5, decimal_places=2)
+    criteria_e = models.DecimalField(max_digits=5, decimal_places=2)
+    criteria_f = models.DecimalField(max_digits=5, decimal_places=2)
+    score = models.DecimalField(max_digits=5, decimal_places=2)
+    year = models.IntegerField()
+
+    def __str__(self):
+        return f'{self.name} - {self.usn}'
+
+class Phase5(models.Model):
+    usn = models.CharField(max_length=20)
+    name = models.CharField(max_length=255)
+    criteria_a = models.DecimalField(max_digits=5, decimal_places=2)
+    criteria_b = models.DecimalField(max_digits=5, decimal_places=2)
+    criteria_c = models.DecimalField(max_digits=5, decimal_places=2)
+    criteria_d = models.DecimalField(max_digits=5, decimal_places=2)
+    score = models.DecimalField(max_digits=5, decimal_places=2)
+    year = models.IntegerField()
+
+    def __str__(self):
+        return f'{self.name} - {self.usn}'
+    
+class Criteria1(models.Model):
+    phase_number = models.IntegerField(primary_key=True)
+    criteria_name = models.CharField(max_length=255)
+    description = models.TextField()
+    max_marks = models.DecimalField(max_digits=5, decimal_places=2)
+
+    def __str__(self):
+        return f'{self.criteria_name} (Phase {self.phase_number})'

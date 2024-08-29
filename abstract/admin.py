@@ -1,24 +1,79 @@
 from django.contrib import admin
-from .models import Mentor, Project, Group, Student
-
-# Register your models here.
-
-
-@admin.register(Mentor)
-class MentorAdmin(admin.ModelAdmin):
-    list_display = ["mentor", "mid"]
+from import_export.admin import ImportExportModelAdmin
+from .models import Phase1, Phase2, Phase3, Phase4, Phase5
 
 
-@admin.register(Project)
-class ProjectAdmin(admin.ModelAdmin):
-    list_display = ["project_id", "project_title"]
+@admin.register(Phase1)
+class PersonAdmin(ImportExportModelAdmin):
+    list_display = (
+        "usn",
+        "name",
+        "criteria_a",
+        "criteria_b",
+        "criteria_c",
+        "criteria_d",
+        "criteria_e",
+        "criteria_f",
+        "score",
+        "year",
+    )
 
 
-@admin.register(Group)
-class GroupAdmin(admin.ModelAdmin):
-    list_display = ["group_id", "project_id", "mid"]
+@admin.register(Phase2)
+class Phase2Admin(ImportExportModelAdmin):
+    list_display = (
+        "usn",
+        "name",
+        "criteria_a",
+        "criteria_b",
+        "criteria_c",
+        "criteria_d",
+        "criteria_e",
+        "score",
+        "year",
+    )
 
 
-@admin.register(Student)
-class StudentAdmin(admin.ModelAdmin):
-    list_display = ["student", "usn", "group_id"]
+@admin.register(Phase3)
+class Phase3Admin(ImportExportModelAdmin):
+    list_display = (
+        "usn",
+        "name",
+        "criteria_a",
+        "criteria_b",
+        "criteria_c",
+        "criteria_d",
+        "criteria_e",
+        "score",
+        "year",
+    )
+
+
+@admin.register(Phase4)
+class Phase4Admin(ImportExportModelAdmin):
+    list_display = (
+        "usn",
+        "name",
+        "criteria_a",
+        "criteria_b",
+        "criteria_c",
+        "criteria_d",
+        "criteria_e",
+        "criteria_f",
+        "score",
+        "year",
+    )
+
+
+@admin.register(Phase5)
+class Phase5Admin(ImportExportModelAdmin):
+    list_display = (
+        "usn",
+        "name",
+        "criteria_a",
+        "criteria_b",
+        "criteria_c",
+        "criteria_d",
+        "score",
+        "year",
+    )

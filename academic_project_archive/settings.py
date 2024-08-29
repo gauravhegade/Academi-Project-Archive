@@ -25,13 +25,21 @@ SECRET_KEY = "django-insecure-_!f9o4mmv@06cifgvo_1a7(4dac&r07n*#$s8e4=3og)&7o#u7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
+
+# add crispy bootstrap config
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 
 # Application definition
 
 INSTALLED_APPS = [
     "abstract",
+    "crispy_forms",
+    "crispy_bootstrap5",
+    "import_export",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -55,7 +63,7 @@ ROOT_URLCONF = "academic_project_archive.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": ["templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
